@@ -40,7 +40,7 @@ if (isset($_POST['add_to_cart'])) {
             </div>
         <?php endforeach; ?>
     </div>
-    <a href="keranjang.php" class="btn btn-success">Lihat Keranjang</a>
+    <a href="keranjang_buku.php" class="btn btn-success">Lihat Keranjang</a>
 </div>
 
 <!-- Bootstrap JS and dependencies -->
