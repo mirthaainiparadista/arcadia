@@ -3,6 +3,19 @@ include 'navbar.php';
 require 'functions.php';
 session_start();
 
+// Inisialisasi keranjang jika belum ada
+if (!isset($_SESSION['keranjang'])) {
+    $_SESSION['keranjang'] = [];
+}
+
+// Menghapus buku dari keranjang
+if (isset($_POST['hapus_buku'])) {
+    $id_buku = $_POST['id_buku'];
+    if (($key = array_search($id_buku, $_SESSION['keranjang'])) !== false) {
+        unset($_SESSION['keranjang'][$key]);
+    }
+}
+
 // Mengambil data buku yang ada di keranjang
 $keranjang = $_SESSION['keranjang'];
 $buku_keranjang = [];
@@ -52,6 +65,10 @@ if (isset($_POST['submit_peminjaman'])) {
                                 <strong>Tanggal Terbit:</strong> <?php echo $item['tgl_terbit']; ?><br>
                                 <strong>Penerbit:</strong> <?php echo $item['nama_penerbit']; ?>
                             </p>
+                            <form method="post" action="">
+                                <input type="hidden" name="id_buku" value="<?php echo $item['id_buku']; ?>">
+                                <button type="submit" name="hapus_buku" class="btn btn-danger">Hapus</button>
+                            </form>
                         </div>
                     </div>
                 </div>
